@@ -1,0 +1,112 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - '**/config.ru'
+    - '**/Rakefile'
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/schema.rb'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+Capybara/FeatureMethods:
+  EnabledMethods:
+    - scenario
+    - feature
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+Layout/LineLength:
+  Max: 100
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+    - 'config/routes.rb'
+Metrics/AbcSize:
+  Max: 20
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/*.rb
+Rails:
+  Enabled: true
+Rails/FilePath:
+  EnforcedStyle: arguments
+Rails/HttpStatus:
+  Enabled: true
+Rails/Output:
+  Exclude:
+    - db/seeds.rb
+RSpec/Dialect:
+  Enabled: true
+  Exclude:
+    - 'spec/dredd/**/*.rb'
+    - 'spec/factories/**/*.rb'
+  PreferredMethods:
+    let: "raise 'we_dont_use_it!'; # let"
+    let!: "raise 'we_dont_use_it!'; # let!"
+    subject: "raise 'we_dont_use_it!'; # subject"
+    subject!: "raise 'we_dont_use_it!'; # subject!"
+    xcontext: "raise 'we_dont_use_it!'; # xcontext"
+    xfeature: "raise 'we_dont_use_it!'; # xfeature"
+    fdescribe: "raise 'we_dont_use_it!'; # fdescribe"
+    fcontext: "raise 'we_dont_use_it!'; # fcontext"
+    ffeature: "raise 'we_dont_use_it!'; # ffeature"
+    shared_examples: "raise 'we_dont_use_it!'; # shared_examples"
+    shared_examples_for: "raise 'we_dont_use_it!'; # shared_examples_for"
+    shared_context: "raise 'we_dont_use_it!'; # shared_context"
+    specify: "raise 'we_dont_use_it!'; # specify"
+    example: "raise 'we_dont_use_it!'; # example"
+    its: "raise 'we_dont_use_it!'; # its"
+    fit: "raise 'we_dont_use_it!'; # fit"
+    fspecify: "raise 'we_dont_use_it!'; # fspecify"
+    fexample: "raise 'we_dont_use_it!'; # fexample"
+    fscenario: "raise 'we_dont_use_it!'; # fscenario"
+    focus: "raise 'we_dont_use_it!'; # focus"
+    xspecify: "raise 'we_dont_use_it!'; # xspecify"
+    xexample: "raise 'we_dont_use_it!'; # xexample"
+    xscenario: "raise 'we_dont_use_it!'; # xscenario"
+    skip: "raise 'we_dont_use_it!'; # skip"
+    pending: "raise 'we_dont_use_it!'; # pending"
+    prepend_before: "raise 'we_dont_use_it!'; # prepend_before"
+    before: "raise 'we_dont_use_it!'; # before"
+    append_before: "raise 'we_dont_use_it!'; # append_before"
+    around: "raise 'we_dont_use_it!'; # around"
+    prepend_after: "raise 'we_dont_use_it!'; # prepend_after"
+    after: "raise 'we_dont_use_it!'; # after"
+    append_after: "raise 'we_dont_use_it!'; # append_after"
+RSpec/ExampleLength:
+  Max: 50
+RSpec/ImplicitBlockExpectation:
+  Enabled: true
+RSpec/MultipleExpectations:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: ()
+    '%i': ()
+    '%w': ()
+Style/RaiseArgs:
+  EnforcedStyle: compact
+Style/RegexpLiteral:
+  StyleGuide: slashes
+Style/SymbolArray:
+  EnforcedStyle: brackets
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
