@@ -11,8 +11,11 @@ gem 'rails', '~> 7.0.4'
 # Additional gems
 gem 'alba'
 gem 'bootsnap', require: false
+gem 'dotenv-rails'
+gem 'httparty'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
+gem 'sidekiq'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do

@@ -15,7 +15,7 @@ RSpec.describe Api::V1::ArticlesController, type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    xit 'filters articles' do
+    it 'filters articles' do
       create(:article, title: 'BBB', content: 'How to train your dragon')
       create(:article, title: 'AAA', content: 'House of the Dragon')
       create(:article, content: 'Monsters Inc.')
@@ -28,6 +28,44 @@ RSpec.describe Api::V1::ArticlesController, type: :request do
 
       articles_titles = body.map { |article| article['content'] }
       expect(articles_titles).to eq(['House of the Dragon', 'How to train your dragon'])
+    end
+  end
+
+  describe 'POST /api/v1/articles' do
+    it 'creates a new article' do
+      article = build(:article, title: 'Title', content: 'Content')
+      create_article_service_mock = instance_double(CreateArticleService)
+
+      allow(CreateArticleService).to receive(:new).and_return(create_article_service_mock)
+
+      allow(create_article_service_mock).to receive(:call).and_return(true)
+      allow(create_article_service_mock).to receive(:article).and_return(article)
+
+      params = { article: { title: 'Title', content: 'Content' } }
+      post '/api/v1/articles', params: params
+
+      body = ActiveSupport::JSON.decode(response.body)
+
+      expect(body['article']['title']).to eq 'Title'
+      expect(body['article']['content']).to eq 'Content'
+      expect(response).to have_http_status(:ok)
+      expect(CreateArticleService).to have_received(:new).with(title: 'Title', content: 'Content')
+      expect(create_article_service_mock).to have_received(:call)
+      expect(create_article_service_mock).to have_received(:article)
+    end
+
+    it 'fails when title is nil' do
+      create_article_service_mock = instance_double(CreateArticleService)
+      allow(CreateArticleService).to receive(:new).and_return(create_article_service_mock)
+
+      allow(create_article_service_mock).to receive(:call).and_return(false)
+
+      params = { article: { title: nil, content: nil } }
+      post '/api/v1/articles', params: params
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(CreateArticleService).to have_received(:new).with(title: nil, content: nil)
+      expect(create_article_service_mock).to have_received(:call)
     end
   end
 end

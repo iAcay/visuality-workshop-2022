@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-xdescribe ArticlesQuery do
+describe ArticlesQuery do
   it 'returns all articles when no filters are applied' do
     create(:article, title: 'First Article')
     create(:article, title: 'Second Article')

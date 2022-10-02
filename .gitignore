@@ -32,5 +32,6 @@
 
 .idea
 
-.env.*
+.env*
+.byebug*
 coverage
